@@ -1,4 +1,4 @@
-package com.juke.auth.authservice
+package com.juke.auth
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
