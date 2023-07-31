@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface PasswordRepository : CoroutineCrudRepository<PasswordEntity, UUID>
+interface PasswordRepository : CoroutineCrudRepository<PasswordEntity, UUID> {
+
+    suspend fun findByUserId(userId: UUID): PasswordEntity?
+}
