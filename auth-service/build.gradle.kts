@@ -42,6 +42,13 @@ dependencies {
 	runtimeOnly ("io.jsonwebtoken:jjwt-impl:0.11.5")
 	runtimeOnly ("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
+	// database
+	implementation("org.flywaydb:flyway-core")
+	implementation("org.postgresql:postgresql")
+	implementation("org.postgresql:r2dbc-postgresql")
+	runtimeOnly("org.postgresql:r2dbc-postgresql")
+	runtimeOnly("org.postgresql:postgresql")
+
 	// swagger
 	implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.0.4")
 
