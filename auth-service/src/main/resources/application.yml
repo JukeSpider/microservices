@@ -6,6 +6,12 @@ spring:
     pool:
       initial-size: ${DB_INITIAL_POOL_SIZE}
       max-size: ${DB_MAX_POOL_SIZE}
+  flyway:
+    enabled: true
+    table: _flyway_schema_history
+    url: jdbc:postgresql://db:${POSTGRES_PORT}/${POSTGRES_DB}
+    user: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
 
 crypto:
   jwt:
