@@ -1,1 +1,14 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://db:${POSTGRES_PORT}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    pool:
+      initial-size: ${DB_INITIAL_POOL_SIZE}
+      max-size: ${DB_MAX_POOL_SIZE}
 
+crypto:
+  jwt:
+    secret: ${CRYPTO_JWT_SECRET}
+    access: ${CRYPTO_JWT_ACCESS_MINUTES}
+    refresh: ${CRYPTO_JWT_REFRESH_MONTH}
