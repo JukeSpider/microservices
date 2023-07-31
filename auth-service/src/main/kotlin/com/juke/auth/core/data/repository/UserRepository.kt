@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface UserRepository : CoroutineCrudRepository<UserEntity, UUID>
+interface UserRepository : CoroutineCrudRepository<UserEntity, UUID> {
+
+    suspend fun findByEmail(email: String): UserEntity?
+}
