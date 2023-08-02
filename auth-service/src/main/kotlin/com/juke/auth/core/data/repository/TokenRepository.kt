@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface TokenRepository : CoroutineCrudRepository<TokenEntity, UUID>
+interface TokenRepository : CoroutineCrudRepository<TokenEntity, UUID> {
+
+    suspend fun findByToken(token: String): TokenEntity?
+}

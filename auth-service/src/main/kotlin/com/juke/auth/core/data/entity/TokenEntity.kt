@@ -10,11 +10,13 @@ import java.util.UUID
 data class TokenEntity (
 
     @Id
-    val id: UUID = UUID.randomUUID(),
+    val id: UUID?,
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    val modifiedAt: LocalDateTime = LocalDateTime.now(),
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
 
     val userId: UUID,
-    val tkn: String,
+    val token: String,
     val type: TokenTypeEnum,
-)
+) {
+    constructor(userId: UUID, token: String, type: TokenTypeEnum) : this(id = null, userId = userId, token = token, type = type)
+}

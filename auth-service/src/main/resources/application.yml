@@ -1,6 +1,10 @@
 spring:
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
   r2dbc:
-    url: r2dbc:postgresql://db:${POSTGRES_PORT}/${POSTGRES_DB}
+    url: r2dbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_DB}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     pool:
@@ -9,7 +13,7 @@ spring:
   flyway:
     enabled: true
     table: _flyway_schema_history
-    url: jdbc:postgresql://db:${POSTGRES_PORT}/${POSTGRES_DB}
+    url: jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_DB}
     user: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 

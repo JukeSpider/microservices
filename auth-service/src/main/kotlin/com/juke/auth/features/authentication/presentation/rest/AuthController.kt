@@ -3,11 +3,15 @@ package com.juke.auth.features.authentication.presentation.rest
 import com.juke.auth.core.domain.failure.Failure
 import com.juke.auth.core.domain.failure.ServiceUnavailableFailure
 import com.juke.auth.core.domain.model.Data
+import com.juke.auth.core.domain.model.Data.*
 import com.juke.auth.core.domain.model.value
 import com.juke.auth.features.authentication.domain.usecase.AuthUseCase
+import com.juke.auth.features.authentication.domain.usecase.RefreshUseCase
 import com.juke.auth.features.authentication.presentation.dto.AuthRequest
 import com.juke.auth.features.authentication.presentation.dto.AuthResponse
+import com.juke.auth.features.authentication.presentation.dto.RefreshRequest
 import com.juke.auth.features.authentication.presentation.mapper.AuthMapper
+import com.juke.auth.features.authentication.presentation.mapper.RefreshMapper
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.enums.ParameterIn
@@ -31,7 +35,9 @@ import reactor.core.publisher.Mono
 @Tag(name = "Authorization", description = "Авторизация, обновление токенов")
 class AuthController(
     private val authMapper: AuthMapper,
+    private val refreshMapper: RefreshMapper,
     private val authUseCase: AuthUseCase,
+    private val refreshUseCase: RefreshUseCase,
 ) {
 
     @Operation(
@@ -101,8 +107,25 @@ class AuthController(
         val params = authMapper.convert(request)
         return mono { authUseCase.invoke(params) }.map {
             when (it) {
-                is Data.Success -> ResponseEntity.ok().body(it.value)
-                is Data.Error -> ResponseEntity.status(it.failure.code).body(it.failure)
+                is Success -> ResponseEntity.ok().body(it.value)
+                is Error -> ResponseEntity.status(it.failure.code).body(it.failure)
+            }
+        }
+    }
+
+    @PostMapping(
+        path = ["/refresh"],
+        produces = [MediaType.APPLICATION_JSON_VALUE],
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+    )
+    fun refresh(
+        @Validated @RequestBody request: RefreshRequest,
+    ): Mono<ResponseEntity<Any>> {
+        val params = refreshMapper.convert(request)
+        return mono { refreshUseCase.invoke(params) }.map {
+            when (it) {
+                is Success -> ResponseEntity.ok(it.value)
+                is Error -> ResponseEntity.status(it.failure.code).body(it.failure)
             }
         }
     }
