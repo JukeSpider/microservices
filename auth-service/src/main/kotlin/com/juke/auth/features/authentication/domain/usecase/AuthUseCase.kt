@@ -70,8 +70,8 @@ class AuthUseCase(
         val access = jwtUtils.getToken(params.email, ROLE_USER, ACCESS)
         val refresh = jwtUtils.getToken(params.email, ROLE_USER, REFRESH)
 
-        val accessEntity = TokenEntity(userId = user.id, tkn = access, type = ACCESS)
-        val refreshEntity = TokenEntity(userId = user.id, tkn = refresh, type = REFRESH)
+        val accessEntity = TokenEntity(userId = user.id, token = access, type = ACCESS)
+        val refreshEntity = TokenEntity(userId = user.id, token = refresh, type = REFRESH)
 
         val accessSaveData = tokenService.save(accessEntity)
         if (accessSaveData is Error) return Error(accessSaveData.failure)

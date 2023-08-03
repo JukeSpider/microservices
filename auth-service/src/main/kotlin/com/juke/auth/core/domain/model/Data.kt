@@ -2,10 +2,10 @@ package com.juke.auth.core.domain.model
 
 import com.juke.auth.core.domain.failure.Failure
 
-sealed class Data<T : Any> {
+sealed class Data<T> {
 
-    class Success<T : Any>(val data: T) : Data<T>()
-    class Error<T : Any>(val failure: Failure) : Data<T>()
+    class Success<T>(val data: T) : Data<T>()
+    class Error<T>(val failure: Failure) : Data<T>()
 
     override fun equals(other: Any?): Boolean {
         return when {
@@ -20,7 +20,7 @@ sealed class Data<T : Any> {
     }
 }
 
-val <T : Any> Data<T>.value: T?
+val <T> Data<T>.value: T?
     get() {
         return when (this) {
             is Data.Success -> this.data
@@ -28,7 +28,7 @@ val <T : Any> Data<T>.value: T?
         }
     }
 
-val <T : Any> Data<T>.failure: Failure?
+val <T> Data<T>.failure: Failure?
     get() {
         return when (this) {
             is Data.Success -> null
