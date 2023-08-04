@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-slim
 
-COPY ./build/libs/auth-service.jar /app.jar
+COPY ./auth-service/build/libs/auth-service.jar /app.jar
 
 EXPOSE 8080
 
