@@ -1,0 +1,62 @@
+version: '3.4'
+
+services:
+  auth-service:
+    build:
+      context: .
+      dockerfile: auth-service/Dockerfile
+    container_name: auth-service
+    networks:
+      - auth
+    env_file:
+      - auth-service/.env
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    command: [
+      "java",
+      "-Xmx2048m",
+      "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+      "-jar",
+      "/app.jar",
+      "--server.port=8080"
+    ]
+    depends_on:
+      - database
+
+  database:
+    container_name: postgres
+    image: postgres
+    env_file:
+      - auth-service/.env
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - auth
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    env_file:
+      - auth-service/.env
+    ports:
+      - "5050:80"
+    networks:
+      - auth
+    restart: unless-stopped
+
+networks:
+  auth:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
