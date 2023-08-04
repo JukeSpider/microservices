@@ -6,16 +6,17 @@
         <option name="commandLineOptions" value="--build" />
         <option name="services">
           <list>
-            <option value="postgres" />
+            <option value="auth-service" />
+            <option value="database" />
             <option value="pgadmin" />
-            <option value="app" />
           </list>
         </option>
         <option name="sourceFilePath" value="docker-compose.yml" />
+        <option name="upDetach" value="false" />
       </settings>
     </deployment>
     <method v="2">
-      <option name="Gradle.BeforeRunTask" enabled="false" tasks="clean build" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean bootJar" externalProjectPath="$PROJECT_DIR$/auth-service" vmOptions="" scriptParameters="" />
     </method>
   </configuration>
 </component>

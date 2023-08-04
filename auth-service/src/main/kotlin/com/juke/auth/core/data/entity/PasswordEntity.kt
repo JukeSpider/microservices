@@ -10,7 +10,7 @@ import java.util.UUID
 data class PasswordEntity (
 
     @Id
-    val id: UUID,
+    val id: UUID? = null,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now(),
 

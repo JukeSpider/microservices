@@ -13,7 +13,7 @@ import java.util.UUID
 data class UserEntity(
 
     @Id
-    val id: UUID,
+    val id: UUID? = null,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now(),
 

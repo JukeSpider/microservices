@@ -53,7 +53,7 @@ class AuthUseCase(
             return Error(BadCredentialsFailure())
         }
 
-        val passwordData = passwordService.findByUserId(user.id)
+        val passwordData = passwordService.findByUserId(user.id!!)
         if (passwordData is Error) {
             return when(passwordData.failure) {
                 is PasswordNotFoundFailure -> Error(BadCredentialsFailure())

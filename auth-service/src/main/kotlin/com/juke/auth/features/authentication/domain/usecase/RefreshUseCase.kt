@@ -68,7 +68,7 @@ class RefreshUseCase(
         val access = jwtUtils.getToken(tokenCredentials.email, UserRoleEnum.ROLE_USER, ACCESS)
         val refresh = jwtUtils.getToken(tokenCredentials.email, UserRoleEnum.ROLE_USER, REFRESH)
 
-        val accessEntity = TokenEntity(userId = user.id, token = access, type = ACCESS)
+        val accessEntity = TokenEntity(userId = user.id!!, token = access, type = ACCESS)
         val refreshEntity = TokenEntity(userId = user.id, token = refresh, type = REFRESH)
 
         val accessSaveData = tokenService.save(accessEntity)
