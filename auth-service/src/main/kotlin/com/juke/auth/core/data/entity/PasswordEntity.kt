@@ -10,9 +10,9 @@ import java.util.UUID
 data class PasswordEntity (
 
     @Id
-    val id: UUID = UUID.randomUUID(),
+    val id: UUID,
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    val modifiedAt: LocalDateTime = LocalDateTime.now(),
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
 
     val userId: UUID,
     val pwd: String,
