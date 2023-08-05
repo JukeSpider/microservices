@@ -12,7 +12,6 @@ data class TokenEntity (
     @Id
     val id: UUID? = null,
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    val updatedAt: LocalDateTime = LocalDateTime.now(),
 
     val userId: UUID,
     val token: String,
