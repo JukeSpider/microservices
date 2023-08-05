@@ -13,7 +13,7 @@ class BaseController {
     @GetMapping("/")
     fun indexController(response: ServerHttpResponse): Mono<Void> {
         response.statusCode = HttpStatus.PERMANENT_REDIRECT
-        response.headers.location = URI.create("/swagger-ui/index.html#/")
+        response.headers.location = URI.create("/webjars/swagger-ui/index.html#/")
         return response.setComplete()
     }
 }
