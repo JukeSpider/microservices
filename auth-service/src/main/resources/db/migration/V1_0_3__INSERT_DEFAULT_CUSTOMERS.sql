@@ -14,6 +14,14 @@ VALUES (
         'ACTIVE'
 );
 
+INSERT INTO USERS(id, email, role, status)
+VALUES (
+        'e16ccc45-f1c0-4cf1-9b6a-85da3a5f74f0',
+        'user1@user.com',
+        'ROLE_USER',
+        'CREATED'
+);
+
 INSERT INTO PASSWORDS(user_id, pwd, status)
 VALUES ('ccde2c48-2b24-4a1b-aa23-9db60f489792',
         '$2a$12$uXv.9/POxfia3qZxT8KBsuOhuIfB.CCuvW.Le3ziIehk1unte4mqq',
