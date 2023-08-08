@@ -1,14 +1,17 @@
 package com.juke.auth.features.registration.domain.utils
 
+import com.juke.auth.features.registration.config.properties.OtpProperties
 import com.juke.auth.features.registration.data.entity.OtpCodeEntity
 import com.juke.auth.features.registration.data.entity.enums.OtpStatusEnum
 import org.springframework.stereotype.Component
 import java.security.SecureRandom
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Component
-class OtpUtils {
+class OtpUtils(
+    private val otpProperties: OtpProperties,
+) {
 
     private val random: SecureRandom = SecureRandom()
 
@@ -22,7 +25,7 @@ class OtpUtils {
             code = generateOtp(),
             status = status,
             userId = userId,
-            expiresAt = LocalDateTime.now().plusMinutes(5)
+            expiresAt = LocalDateTime.now().plusMinutes(otpProperties.pending)
         )
     }
 

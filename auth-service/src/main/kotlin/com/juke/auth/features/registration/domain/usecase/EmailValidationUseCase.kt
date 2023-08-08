@@ -1,6 +1,6 @@
 package com.juke.auth.features.registration.domain.usecase
 
-import com.juke.auth.core.data.entity.enums.UserStatusEnum.*
+import com.juke.auth.core.data.entity.enums.UserStatusEnum.CREATED
 import com.juke.auth.core.domain.behavior.UserBehavior
 import com.juke.auth.core.domain.model.Data
 import com.juke.auth.core.domain.model.Data.Error
@@ -9,14 +9,11 @@ import com.juke.auth.core.domain.model.value
 import com.juke.auth.core.domain.success.StatusResponse
 import com.juke.auth.core.domain.usecase.UseCase
 import com.juke.auth.features.authentication.domain.failure.EmailNotFoundFailure
-import com.juke.auth.features.registration.data.entity.OtpCodeEntity
-import com.juke.auth.features.registration.data.entity.enums.OtpStatusEnum
-import com.juke.auth.features.registration.data.entity.enums.OtpStatusEnum.*
+import com.juke.auth.features.registration.data.entity.enums.OtpStatusEnum.PENDING
 import com.juke.auth.features.registration.domain.behavior.OtpCodeBehavior
 import com.juke.auth.features.registration.domain.failure.RegistrationUnavailableFailure
 import com.juke.auth.features.registration.domain.usecase.EmailValidationUseCase.EmailParams
 import com.juke.auth.features.registration.domain.utils.OtpUtils
-import com.juke.auth.features.registration.presentation.dto.enums.RegistrationStatusEnum
 import com.juke.auth.features.registration.presentation.dto.enums.RegistrationStatusEnum.EMAIL_VALIDATED
 import org.springframework.stereotype.Component
 

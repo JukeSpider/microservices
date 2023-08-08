@@ -1,6 +1,5 @@
 package com.juke.auth.features.registration.data.service
 
-import com.juke.auth.core.data.entity.UserEntity
 import com.juke.auth.core.domain.failure.ServiceUnavailableFailure
 import com.juke.auth.core.domain.model.Data
 import com.juke.auth.core.domain.model.Data.Error
@@ -12,7 +11,7 @@ import com.juke.auth.features.registration.domain.failure.OtpNotFoundFailure
 import org.slf4j.Logger
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.UUID
+import java.util.*
 
 @Service
 class OtpCodeService(

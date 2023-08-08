@@ -1,7 +1,6 @@
 package com.juke.auth.features.registration.presentation.mapper
 
 import com.juke.auth.core.presentation.mapper.Mapper
-import com.juke.auth.features.registration.domain.usecase.EmailValidationUseCase
 import com.juke.auth.features.registration.domain.usecase.EmailValidationUseCase.EmailParams
 import com.juke.auth.features.registration.presentation.dto.EmailValidationRequest
 import org.springframework.stereotype.Component

@@ -22,3 +22,8 @@ crypto:
     secret: ${CRYPTO_JWT_SECRET}
     access: ${CRYPTO_JWT_ACCESS_MINUTES}
     refresh: ${CRYPTO_JWT_REFRESH_MONTH}
+
+otp:
+  expiration:
+    pending: ${OTP_EXPIRATION_PENDING}
+    confirmed: ${OTP_EXPIRATION_CONFIRMED}

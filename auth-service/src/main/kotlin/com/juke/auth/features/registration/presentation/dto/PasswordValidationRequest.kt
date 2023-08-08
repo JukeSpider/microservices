@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 
-data class CodeValidationRequest(
+data class PasswordValidationRequest(
 
     @NotNull
     @Email
@@ -12,5 +12,9 @@ data class CodeValidationRequest(
 
     @NotNull
     @NotBlank
-    val code: String?
+    val code: String?,
+
+    @NotNull
+    @NotBlank
+    val password: String?,
 )

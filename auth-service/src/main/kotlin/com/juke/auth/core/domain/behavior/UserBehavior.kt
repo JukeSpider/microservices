@@ -6,4 +6,6 @@ import com.juke.auth.core.domain.model.Data
 interface UserBehavior {
 
     suspend fun findByEmail(email: String): Data<UserEntity>
+
+    suspend fun save(user: UserEntity): Data<UserEntity>
 }

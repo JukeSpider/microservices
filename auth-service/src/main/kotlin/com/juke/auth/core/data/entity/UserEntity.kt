@@ -7,7 +7,7 @@ import com.juke.auth.core.data.entity.enums.UserStatusEnum.CREATED
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Table(name = "users")
 data class UserEntity(
