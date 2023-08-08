@@ -12,8 +12,9 @@ data class OtpCodeEntity(
     @Id
     val id: UUID? = null,
     val code: String,
-    val status: OtpStatusEnum,
+    var status: OtpStatusEnum,
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    val updatedAt: LocalDateTime = LocalDateTime.now(),
+    var expiresAt: LocalDateTime,
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
     val userId: UUID
 )

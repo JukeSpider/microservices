@@ -15,4 +15,6 @@ interface OtpCodeRepository : CoroutineCrudRepository<OtpCodeEntity, UUID> {
             "SET STATUS = 'REVOKED', UPDATED_AT = CURRENT_TIMESTAMP " +
             "WHERE USER_ID = :userId")
     suspend fun revokeAllUserOtpCodes(userId: UUID)
+
+    suspend fun findByCodeAndUserId(code: String, userId: UUID): OtpCodeEntity?
 }

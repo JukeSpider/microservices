@@ -7,5 +7,5 @@ data class EmailValidationRequest(
 
     @NotNull
     @Email
-    val email: String
+    val email: String?
 )

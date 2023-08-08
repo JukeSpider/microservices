@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component
 class EmailValidationMapper : Mapper<EmailValidationRequest, EmailParams> {
 
     override fun convert(request: EmailValidationRequest): EmailParams {
-        return EmailParams(email = request.email)
+        return EmailParams(email = request.email!!)
     }
 }

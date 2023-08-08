@@ -46,8 +46,7 @@ class EmailValidationUseCase(
         val revokedData = otpService.revokeAllUserOtpCodes(user.id!!)
         if (revokedData is Error) return Error(revokedData.failure)
 
-        val code = otpUtils.generateOtp()
-        val otpCode = OtpCodeEntity(code = code, status = PENDING, userId = user.id)
+        val otpCode = otpUtils.generateOtpCodeEntity(status = PENDING, userId = user.id)
 
         val otpCodeData = otpService.save(otpCode)
         if (otpCodeData is Error) return Error(otpCodeData.failure)
