@@ -6,7 +6,11 @@ import java.util.*
 
 interface PasswordBehavior {
 
-    suspend fun findByUserId(userId: UUID): Data<PasswordEntity>
+    suspend fun findActiveUserPassword(userId: UUID): Data<PasswordEntity>
 
     suspend fun save(password: PasswordEntity): Data<PasswordEntity>
+
+    suspend fun revokeAllUserPasswords(userId: UUID): Data<Unit>
+
+    suspend fun findAllUserPasswords(userId: UUID): Data<List<PasswordEntity>>
 }

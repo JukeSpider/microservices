@@ -17,4 +17,8 @@ data class PasswordValidationRequest(
     @NotNull
     @NotBlank
     val password: String?,
+
+    @NotNull
+    @NotBlank
+    val flow: String?,
 )

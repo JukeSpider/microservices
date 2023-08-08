@@ -1,6 +1,7 @@
 package com.juke.auth.features.registration.data.repository
 
 import com.juke.auth.features.registration.data.entity.OtpCodeEntity
+import com.juke.auth.features.registration.data.entity.enums.FlowTypeEnum
 import org.springframework.data.r2dbc.repository.Modifying
 import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.repository.kotlin.CoroutineCrudRepository
@@ -11,10 +12,10 @@ import java.util.*
 interface OtpCodeRepository : CoroutineCrudRepository<OtpCodeEntity, UUID> {
 
     @Modifying
-    @Query("UPDATE OTP_CODES " +
-            "SET STATUS = 'REVOKED', UPDATED_AT = CURRENT_TIMESTAMP " +
-            "WHERE USER_ID = :userId")
+    @Query("UPDATE otp_codes " +
+            "SET status = 'REVOKED', updated_at = CURRENT_TIMESTAMP " +
+            "WHERE user_id = :userId")
     suspend fun revokeAllUserOtpCodes(userId: UUID)
 
-    suspend fun findByCodeAndUserId(code: String, userId: UUID): OtpCodeEntity?
+    suspend fun findByCodeAndUserIdAndFlow(code: String, userId: UUID, flow: FlowTypeEnum): OtpCodeEntity?
 }

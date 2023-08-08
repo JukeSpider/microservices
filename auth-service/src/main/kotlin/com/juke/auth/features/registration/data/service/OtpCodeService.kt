@@ -5,6 +5,7 @@ import com.juke.auth.core.domain.model.Data
 import com.juke.auth.core.domain.model.Data.Error
 import com.juke.auth.core.domain.model.Data.Success
 import com.juke.auth.features.registration.data.entity.OtpCodeEntity
+import com.juke.auth.features.registration.data.entity.enums.FlowTypeEnum
 import com.juke.auth.features.registration.data.repository.OtpCodeRepository
 import com.juke.auth.features.registration.domain.behavior.OtpCodeBehavior
 import com.juke.auth.features.registration.domain.failure.OtpNotFoundFailure
@@ -40,9 +41,9 @@ class OtpCodeService(
         }
     }
 
-    override suspend fun findByCodeAndUser(code: String, userId: UUID): Data<OtpCodeEntity> {
+    override suspend fun findByCodeUserFlow(code: String, userId: UUID, flow: FlowTypeEnum): Data<OtpCodeEntity> {
         return try {
-            when (val otpCode = repo.findByCodeAndUserId(code, userId)) {
+            when (val otpCode = repo.findByCodeAndUserIdAndFlow(code, userId, flow)) {
                 is OtpCodeEntity -> Success(otpCode)
                 else -> Error(OtpNotFoundFailure())
             }

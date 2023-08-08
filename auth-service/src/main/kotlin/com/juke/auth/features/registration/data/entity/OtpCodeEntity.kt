@@ -1,5 +1,6 @@
 package com.juke.auth.features.registration.data.entity
 
+import com.juke.auth.features.registration.data.entity.enums.FlowTypeEnum
 import com.juke.auth.features.registration.data.entity.enums.OtpStatusEnum
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
@@ -13,6 +14,7 @@ data class OtpCodeEntity(
     val id: UUID? = null,
     val code: String,
     val status: OtpStatusEnum,
+    val flow: FlowTypeEnum,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val expiresAt: LocalDateTime,
     val updatedAt: LocalDateTime = LocalDateTime.now(),
