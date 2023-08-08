@@ -12,7 +12,7 @@ import com.juke.auth.core.domain.model.Data.Success
 import org.slf4j.Logger
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.UUID
+import java.util.*
 
 @Service
 class TokenService(

@@ -4,7 +4,7 @@ import com.juke.auth.core.data.entity.enums.TokenTypeEnum
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Table(name = "tokens")
 data class TokenEntity (

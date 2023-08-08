@@ -10,7 +10,8 @@ import com.juke.auth.core.domain.model.Data.Success
 import com.juke.auth.features.authentication.domain.failure.PasswordNotFoundFailure
 import org.slf4j.Logger
 import org.springframework.stereotype.Service
-import java.util.UUID
+import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 class PasswordService(
@@ -24,6 +25,16 @@ class PasswordService(
                 is PasswordEntity -> Success(result)
                 else -> Error(PasswordNotFoundFailure())
             }
+        } catch (t: Throwable) {
+            logger.error("Unexpected exception thrown", t)
+            Error(ServiceUnavailableFailure())
+        }
+    }
+
+    @Transactional
+    override suspend fun save(password: PasswordEntity): Data<PasswordEntity> {
+        return try {
+            Success(repo.save(password))
         } catch (t: Throwable) {
             logger.error("Unexpected exception thrown", t)
             Error(ServiceUnavailableFailure())

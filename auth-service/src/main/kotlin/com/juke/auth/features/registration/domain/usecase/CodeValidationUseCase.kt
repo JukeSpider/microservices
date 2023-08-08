@@ -9,6 +9,7 @@ import com.juke.auth.core.domain.model.value
 import com.juke.auth.core.domain.success.StatusResponse
 import com.juke.auth.core.domain.usecase.UseCase
 import com.juke.auth.features.authentication.domain.failure.EmailNotFoundFailure
+import com.juke.auth.features.registration.config.properties.OtpProperties
 import com.juke.auth.features.registration.data.entity.enums.OtpStatusEnum.CONFIRMED
 import com.juke.auth.features.registration.data.entity.enums.OtpStatusEnum.PENDING
 import com.juke.auth.features.registration.domain.behavior.OtpCodeBehavior
@@ -25,6 +26,7 @@ class CodeValidationUseCase(
     private val otpService: OtpCodeBehavior,
     private val userService: UserBehavior,
     private val otpUtils: OtpUtils,
+    private val otpProperties: OtpProperties,
 ) : UseCase<CodeParams, StatusResponse> {
 
     data class CodeParams(
@@ -56,11 +58,13 @@ class CodeValidationUseCase(
         if (otpCode.status != PENDING) return Error(RegistrationUnavailableFailure())
         if (otpUtils.isExpired(otpCode)) return Error(RegistrationUnavailableFailure())
 
-        otpCode.updatedAt = LocalDateTime.now()
-        otpCode.expiresAt = LocalDateTime.now().plusMinutes(15)
-        otpCode.status = CONFIRMED
+        val updatedOtp = otpCode.copy(
+            status = CONFIRMED,
+            updatedAt = LocalDateTime.now(),
+            expiresAt = LocalDateTime.now().plusMinutes(otpProperties.confirmed)
+        )
 
-        val savedData = otpService.save(otpCode)
+        val savedData = otpService.save(updatedOtp)
         if (savedData is Error) return Error(savedData.failure)
 
         return Success(StatusResponse(OTP_CODE_VALIDATED.getMessage()))

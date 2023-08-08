@@ -3,7 +3,7 @@ package com.juke.auth.core.domain.behavior
 import com.juke.auth.core.data.entity.TokenEntity
 import com.juke.auth.core.data.entity.enums.TokenTypeEnum
 import com.juke.auth.core.domain.model.Data
-import java.util.UUID
+import java.util.*
 
 interface TokenBehavior {
 

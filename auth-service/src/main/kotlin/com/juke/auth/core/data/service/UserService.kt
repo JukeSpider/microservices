@@ -10,6 +10,7 @@ import com.juke.auth.core.domain.model.Data.Success
 import com.juke.auth.features.authentication.domain.failure.EmailNotFoundFailure
 import org.slf4j.Logger
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserService(
@@ -23,6 +24,16 @@ class UserService(
                 is UserEntity -> Success(result)
                 else -> Error(EmailNotFoundFailure())
             }
+        } catch (t: Throwable) {
+            logger.error("Unexpected exception thrown", t)
+            Error(ServiceUnavailableFailure())
+        }
+    }
+
+    @Transactional
+    override suspend fun save(user: UserEntity): Data<UserEntity> {
+        return try {
+            Success(repo.save(user))
         } catch (t: Throwable) {
             logger.error("Unexpected exception thrown", t)
             Error(ServiceUnavailableFailure())
