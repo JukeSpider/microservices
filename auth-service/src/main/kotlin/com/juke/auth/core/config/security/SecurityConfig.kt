@@ -40,6 +40,9 @@ class SecurityConfig(
             .csrf { csrf -> csrf.disable() }
             .authenticationManager(manager)
             .securityContextRepository(context)
+            .authorizeExchange { ex ->
+                ex.pathMatchers("/api/v*/admin", "/api/v*/admin/**").hasRole("ADMIN")
+            }
             .authorizeExchange { ex -> ex.anyExchange().permitAll() }
             .exceptionHandling { ex ->
                 ex.authenticationEntryPoint { exchanges, _ ->

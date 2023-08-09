@@ -2,7 +2,7 @@ INSERT INTO USERS(id, email, role, status)
 VALUES (
         'ccde2c48-2b24-4a1b-aa23-9db60f489792',
         'user@user.com',
-        'ROLE_ADMIN',
+        'ROLE_USER',
         'VERIFIED'
 );
 
@@ -10,7 +10,7 @@ INSERT INTO USERS(id, email, role, status)
 VALUES (
         'd96288d9-3eba-43e9-92c4-0ea7fb633730',
         'user@admin.com',
-        'ROLE_USER',
+        'ROLE_ADMIN',
         'ACTIVE'
 );
 

@@ -45,8 +45,8 @@ class EmailValidator(
 
     private fun checkStatus(status: UserStatusEnum, flow: FlowTypeEnum): Boolean {
         return when (flow) {
-            REGISTRATION -> status == CREATED
-            else -> status == VERIFIED || status == ACTIVE
+            REGISTRATION    -> (status == CREATED)
+            else            -> (status == VERIFIED || status == ACTIVE)
         }
     }
 }

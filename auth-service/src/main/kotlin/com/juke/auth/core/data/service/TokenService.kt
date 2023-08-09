@@ -55,4 +55,14 @@ class TokenService(
             Error(ServiceUnavailableFailure())
         }
     }
+
+    @Transactional
+    override suspend fun deleteAllUserTokens(userId: UUID): Data<Unit> {
+        return try {
+            Success(repo.deleteAllByUserId(userId))
+        } catch (t: Throwable) {
+            logger.error("Unexpected exception thrown", t)
+            Error(ServiceUnavailableFailure())
+        }
+    }
 }

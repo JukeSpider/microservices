@@ -12,4 +12,6 @@ interface TokenBehavior {
     suspend fun deleteById(id: UUID): Data<Unit>
 
     suspend fun findByToken(token: String, type: TokenTypeEnum): Data<TokenEntity>
+
+    suspend fun deleteAllUserTokens(userId: UUID): Data<Unit>
 }
