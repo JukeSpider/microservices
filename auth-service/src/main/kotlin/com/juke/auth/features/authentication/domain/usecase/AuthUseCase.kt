@@ -67,8 +67,8 @@ class AuthUseCase(
             return Error(BadCredentialsFailure())
         }
 
-        val access = jwtUtils.getToken(params.email, ROLE_USER, ACCESS)
-        val refresh = jwtUtils.getToken(params.email, ROLE_USER, REFRESH)
+        val access = jwtUtils.getToken(params.email, user.role, ACCESS)
+        val refresh = jwtUtils.getToken(params.email, user.role, REFRESH)
 
         val accessEntity = TokenEntity(userId = user.id, token = access, type = ACCESS)
         val refreshEntity = TokenEntity(userId = user.id, token = refresh, type = REFRESH)

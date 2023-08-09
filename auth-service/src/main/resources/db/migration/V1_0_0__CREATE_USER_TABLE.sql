@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS USERS
 (
     ID              UUID            NOT NULL PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
-    EMAIL           TEXT            NOT NULL,
+    EMAIL           TEXT            NOT NULL UNIQUE,
     ROLE            VARCHAR(30)     NOT NULL
                     CHECK (ROLE IN ('ROLE_ADMIN', 'ROLE_USER')),
     STATUS          VARCHAR(30)     NOT NULL

@@ -10,4 +10,6 @@ import java.util.*
 interface TokenRepository : CoroutineCrudRepository<TokenEntity, UUID> {
 
     suspend fun findByTokenAndType(token: String, type: TokenTypeEnum): TokenEntity?
+
+    suspend fun deleteAllByUserId(userId: UUID)
 }
