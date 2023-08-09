@@ -1,32 +1,31 @@
 package com.juke.auth.features.registration.domain.utils
 
+import com.juke.auth.core.data.entity.PasswordEntity
+import com.juke.auth.core.data.service.PasswordService
+import com.juke.auth.core.domain.behavior.PasswordBehavior
+import com.juke.auth.core.domain.model.Data
+import com.juke.auth.core.domain.model.Data.Error
+import com.juke.auth.core.domain.model.value
+import com.juke.auth.features.registration.domain.failure.InvalidPasswordFailure
+import com.juke.auth.features.registration.domain.failure.PasswordAlreadyUsedFailure
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
+import java.util.UUID
 
 @Component
-class PasswordValidator {
+class PasswordValidator(
+    private val passwordService: PasswordBehavior,
+    private val passwordEncoder: PasswordEncoder,
+) {
 
-    private val specials = ".!@#$%^&*()-_<>"
+    suspend fun validatePassword(password: String, userId: UUID): Data<Unit> {
+        val passwordsData = passwordService.findAllUserPasswords(userId)
+        if (passwordsData is Error) return Error(passwordsData.failure)
 
-    fun validate(password: String) : Boolean {
-        if (password.length < 8) return false
+        val passwords = passwordsData.value!!
 
-        val hasUpper = password.chars().anyMatch(Character::isUpperCase)
-        val hasLower = password.chars().anyMatch(Character::isLowerCase)
-        val hasDigit = password.chars().anyMatch(Character::isDigit)
-        val hasSpecial = password.chars().anyMatch{ c -> specials.contains(c.toChar()) }
-        val onlyAllowed = password.chars().allMatch(this::isAllowed)
+        val isUnique = passwords.all { p -> !passwordEncoder.matches(password, p.pwd) }
 
-        return hasUpper && hasLower && hasDigit && hasSpecial && onlyAllowed
-    }
-
-    private fun isAllowed(char: Int) : Boolean {
-        val c = char.toChar()
-
-        val isUpper = c.isUpperCase()
-        val isLower = c.isLowerCase()
-        val isDigit = c.isDigit()
-        val isSpecial = specials.contains(c)
-
-        return isUpper || isLower || isDigit || isSpecial
+        return if (isUnique) Data.Success(Unit) else Error(PasswordAlreadyUsedFailure())
     }
 }

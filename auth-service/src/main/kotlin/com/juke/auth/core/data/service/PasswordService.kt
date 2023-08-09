@@ -8,9 +8,11 @@ import com.juke.auth.core.domain.model.Data
 import com.juke.auth.core.domain.model.Data.Error
 import com.juke.auth.core.domain.model.Data.Success
 import com.juke.auth.features.authentication.domain.failure.PasswordNotFoundFailure
+import kotlinx.coroutines.flow.toList
 import org.slf4j.Logger
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import reactor.core.publisher.Flux
 import java.util.*
 
 @Service
@@ -19,9 +21,9 @@ class PasswordService(
     private val logger: Logger,
 ) : PasswordBehavior {
 
-    override suspend fun findByUserId(userId: UUID): Data<PasswordEntity> {
+    override suspend fun findActiveUserPassword(userId: UUID): Data<PasswordEntity> {
         return try {
-            when (val result = repo.findByUserId(userId)) {
+            when (val result = repo.findActivePasswordByUser(userId)) {
                 is PasswordEntity -> Success(result)
                 else -> Error(PasswordNotFoundFailure())
             }
@@ -35,6 +37,25 @@ class PasswordService(
     override suspend fun save(password: PasswordEntity): Data<PasswordEntity> {
         return try {
             Success(repo.save(password))
+        } catch (t: Throwable) {
+            logger.error("Unexpected exception thrown", t)
+            Error(ServiceUnavailableFailure())
+        }
+    }
+
+    @Transactional
+    override suspend fun revokeAllUserPasswords(userId: UUID): Data<Unit> {
+        return try {
+            Success(repo.revokeAllUserPasswords(userId))
+        } catch (t: Throwable) {
+            logger.error("Unexpected exception thrown", t)
+            Error(ServiceUnavailableFailure())
+        }
+    }
+
+    override suspend fun findAllUserPasswords(userId: UUID): Data<List<PasswordEntity>> {
+        return try {
+            Success(repo.findAllByUserId(userId).toList())
         } catch (t: Throwable) {
             logger.error("Unexpected exception thrown", t)
             Error(ServiceUnavailableFailure())

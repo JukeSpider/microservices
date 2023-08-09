@@ -12,5 +12,9 @@ data class CodeValidationRequest(
 
     @NotNull
     @NotBlank
-    val code: String?
+    val code: String?,
+
+    @NotNull
+    @NotBlank
+    val flow: String?,
 )

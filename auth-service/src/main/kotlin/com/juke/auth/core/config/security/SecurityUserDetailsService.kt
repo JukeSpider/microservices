@@ -39,7 +39,7 @@ class SecurityUserDetailsService(
 
         val user = userData.value!!
 
-        val passwordData = passwordService.findByUserId(user.id!!)
+        val passwordData = passwordService.findActiveUserPassword(user.id!!)
         if (passwordData is Error) return Error(PasswordNotFoundFailure())
 
         val password = passwordData.value!!
