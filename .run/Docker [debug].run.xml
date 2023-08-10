@@ -9,6 +9,7 @@
             <option value="auth-service" />
             <option value="database" />
             <option value="pgadmin" />
+            <option value="notification" />
           </list>
         </option>
         <option name="sourceFilePath" value="docker-compose.yml" />
@@ -17,6 +18,7 @@
     </deployment>
     <method v="2">
       <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean bootJar" externalProjectPath="$PROJECT_DIR$/auth-service" vmOptions="" scriptParameters="" />
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean bootJar" externalProjectPath="$PROJECT_DIR$/notification" vmOptions="" scriptParameters="" />
     </method>
   </configuration>
 </component>
