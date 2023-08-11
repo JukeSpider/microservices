@@ -23,6 +23,28 @@ services:
     ]
     depends_on:
       - database
+      - notification
+
+  notification:
+    build:
+      context: .
+      dockerfile: notification/Dockerfile
+    container_name: notification
+    networks:
+      - auth
+    env_file:
+      - notification/.env
+    ports:
+      - "8081:8081"
+      - "5006:5006"
+    command: [
+      "java",
+      "-Xmx2048m",
+      "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006",
+      "-jar",
+      "/app.jar",
+      "--server.port=8081"
+    ]
 
   database:
     container_name: postgres

@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "3.1.2"
+	id("org.springframework.boot") version "3.0.2"
 	id("io.spring.dependency-management") version "1.1.2"
 	kotlin("jvm") version "1.8.22"
 	kotlin("plugin.spring") version "1.8.22"
@@ -23,6 +23,8 @@ configurations {
 repositories {
 	mavenCentral()
 }
+
+extra["springCloudVersion"] = "2022.0.4"
 
 dependencies {
 
@@ -54,6 +56,11 @@ dependencies {
 
 	// processor
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+	// cloud
+	implementation("com.playtika.reactivefeign:feign-reactor-core:4.0.0")
+	implementation("com.playtika.reactivefeign:feign-reactor-webclient:4.0.0")
+	implementation("com.playtika.reactivefeign:feign-reactor-spring-cloud-starter:4.0.0")
 
 	// testing
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

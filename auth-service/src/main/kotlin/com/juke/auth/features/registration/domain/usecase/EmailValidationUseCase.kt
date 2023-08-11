@@ -9,10 +9,14 @@ import com.juke.auth.core.domain.usecase.UseCase
 import com.juke.auth.features.registration.data.entity.enums.FlowTypeEnum
 import com.juke.auth.features.registration.data.entity.enums.OtpStatusEnum.PENDING
 import com.juke.auth.features.registration.domain.behavior.OtpCodeBehavior
+import com.juke.auth.features.registration.domain.feign.client.NotificationClient
+import com.juke.auth.features.registration.domain.feign.dto.OtpMailRequest
+import com.juke.auth.features.registration.domain.feign.wrapper.NotificationClientWrapper
 import com.juke.auth.features.registration.domain.usecase.EmailValidationUseCase.EmailParams
 import com.juke.auth.features.registration.domain.utils.EmailValidator
 import com.juke.auth.features.registration.domain.utils.OtpUtils
 import com.juke.auth.features.registration.presentation.dto.enums.RegistrationStatusEnum.EMAIL_VALIDATED
+import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.stereotype.Component
 
 @Component
@@ -20,6 +24,7 @@ class EmailValidationUseCase(
     private val otpService: OtpCodeBehavior,
     private val otpUtils: OtpUtils,
     private val emailValidator: EmailValidator,
+    private val notificationClient: NotificationClientWrapper
 ) : UseCase<EmailParams, StatusResponse> {
 
     data class EmailParams(
@@ -41,6 +46,11 @@ class EmailValidationUseCase(
 
         val otpCodeData = otpService.save(otpCode)
         if (otpCodeData is Error) return Error(otpCodeData.failure)
+
+        val otpMailRequest = OtpMailRequest(code = otpCode.code, email = user.email)
+
+        val mailData = notificationClient.sendEmail(otpMailRequest)
+        if (mailData is Error) return Error(mailData.failure)
 
         return Success(StatusResponse(EMAIL_VALIDATED.getMessage()))
     }
