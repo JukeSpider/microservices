@@ -18,6 +18,8 @@ repositories {
     mavenCentral()
 }
 
+extra["springCloudVersion"] = "2022.0.4"
+
 dependencies {
     // kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -51,10 +53,19 @@ dependencies {
     // mail
     implementation("org.springframework.boot:spring-boot-starter-mail")
 
+    // cloud
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
     // testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.security:spring-security-test")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
 }
 
 tasks.withType<KotlinCompile> {
