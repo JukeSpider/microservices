@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Mono
 
 @RestController
-@RequestMapping("/api/v1/mail")
+@RequestMapping("/api/notification/mail")
 class MailController(
     private val otpMailMapper: OtpMailMapper,
     private val otpMailUseCase: OtpMailUseCase,

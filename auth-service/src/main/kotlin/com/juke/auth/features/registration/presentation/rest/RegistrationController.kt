@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Mono
 
 @RestController
-@RequestMapping("/api/v1/validate")
+@RequestMapping("/api/auth/validate")
 class RegistrationController (
     private val emailUseCase: EmailValidationUseCase,
     private val emailMapper: EmailValidationMapper,
