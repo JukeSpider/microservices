@@ -24,6 +24,7 @@ services:
     depends_on:
       - database
       - notification
+      - eureka
 
   notification:
     build:
@@ -44,6 +45,28 @@ services:
       "-jar",
       "/app.jar",
       "--server.port=8081"
+    ]
+    depends_on:
+      - database
+      - eureka
+
+  eureka:
+    build:
+      context: .
+      dockerfile: eureka/Dockerfile
+    container_name: eureka
+    networks:
+      - auth
+    ports:
+      - "8761:8761"
+      - "5061:5061"
+    command: [
+      "java",
+      "-Xmx2048m",
+      "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5061",
+      "-jar",
+      "/app.jar",
+      "--server.port=8761"
     ]
 
   database:

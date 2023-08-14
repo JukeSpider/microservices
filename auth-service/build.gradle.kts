@@ -61,11 +61,18 @@ dependencies {
 	implementation("com.playtika.reactivefeign:feign-reactor-core:4.0.0")
 	implementation("com.playtika.reactivefeign:feign-reactor-webclient:4.0.0")
 	implementation("com.playtika.reactivefeign:feign-reactor-spring-cloud-starter:4.0.0")
+	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
 	// testing
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.springframework.security:spring-security-test")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+	}
 }
 
 tasks.withType<KotlinCompile> {

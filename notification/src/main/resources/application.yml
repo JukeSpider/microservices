@@ -2,6 +2,8 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: notification
   data:
     r2dbc:
       repositories:
@@ -37,4 +39,7 @@ crypto:
     access: ${CRYPTO_JWT_ACCESS_MINUTES}
     refresh: ${CRYPTO_JWT_REFRESH_MONTH}
 
-
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:8761/eureka
