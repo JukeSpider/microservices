@@ -69,6 +69,25 @@ services:
       "--server.port=8761"
     ]
 
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    container_name: gateway
+    networks:
+      - auth
+    ports:
+      - "8000:8000"
+      - "5000:5000"
+    command: [
+      "java",
+      "-Xmx2048m",
+      "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5000",
+      "-jar",
+      "/app.jar",
+      "--server.port=8000"
+    ]
+
   database:
     container_name: postgres
     image: postgres

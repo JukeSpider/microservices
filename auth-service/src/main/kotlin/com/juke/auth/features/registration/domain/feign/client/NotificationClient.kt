@@ -13,14 +13,11 @@ import reactivefeign.spring.config.ReactiveFeignClient
 import reactor.core.publisher.Mono
 
 @Component
-@ReactiveFeignClient(
-    name = "notification",
-    url = "http://notification:8081/api/v1/mail",
-)
+@ReactiveFeignClient("NOTIFICATION")
 interface NotificationClient {
 
     @RequestMapping(
-        path = ["/send"],
+        path = ["/api/notification/mail/send"],
         method = [RequestMethod.POST],
         produces = [MediaType.APPLICATION_JSON_VALUE],
         consumes = [MediaType.APPLICATION_JSON_VALUE],

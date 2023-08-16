@@ -10,6 +10,7 @@
             <option value="database" />
             <option value="pgadmin" />
             <option value="notification" />
+            <option value="eureka" />
             <option value="gateway" />
           </list>
         </option>
@@ -20,6 +21,7 @@
     <method v="2">
       <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean bootJar" externalProjectPath="$PROJECT_DIR$/auth-service" vmOptions="" scriptParameters="" />
       <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean bootJar" externalProjectPath="$PROJECT_DIR$/notification" vmOptions="" scriptParameters="" />
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean bootJar" externalProjectPath="$PROJECT_DIR$/eureka" vmOptions="" scriptParameters="" />
       <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean bootJar" externalProjectPath="$PROJECT_DIR$/gateway" vmOptions="" scriptParameters="" />
     </method>
   </configuration>
