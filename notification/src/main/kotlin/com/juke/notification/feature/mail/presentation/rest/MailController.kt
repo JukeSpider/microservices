@@ -1,7 +1,5 @@
 package com.juke.notification.feature.mail.presentation.rest
 
-import com.juke.notification.core.domain.failure.ServiceUnavailableFailure
-import com.juke.notification.core.domain.model.Data
 import com.juke.notification.core.domain.model.Data.Error
 import com.juke.notification.core.domain.model.Data.Success
 import com.juke.notification.core.domain.model.value
@@ -9,13 +7,11 @@ import com.juke.notification.feature.mail.domain.usecase.OtpMailUseCase
 import com.juke.notification.feature.mail.presentation.dto.OtpMailRequest
 import com.juke.notification.feature.mail.presentation.mapper.OtpMailMapper
 import kotlinx.coroutines.reactor.mono
-import org.slf4j.Logger
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Mono
 

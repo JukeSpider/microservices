@@ -3,7 +3,6 @@ package com.juke.auth.features.authentication.domain.usecase
 import com.juke.auth.core.data.entity.TokenEntity
 import com.juke.auth.core.data.entity.enums.TokenTypeEnum.ACCESS
 import com.juke.auth.core.data.entity.enums.TokenTypeEnum.REFRESH
-import com.juke.auth.core.data.entity.enums.UserRoleEnum.ROLE_USER
 import com.juke.auth.core.data.entity.enums.UserStatusEnum
 import com.juke.auth.core.domain.behavior.PasswordBehavior
 import com.juke.auth.core.domain.behavior.TokenBehavior

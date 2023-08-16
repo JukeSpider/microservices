@@ -1,6 +1,7 @@
 package com.juke.auth.features.admin.presentation.rest
 
-import com.juke.auth.core.domain.model.Data.*
+import com.juke.auth.core.domain.model.Data.Error
+import com.juke.auth.core.domain.model.Data.Success
 import com.juke.auth.core.domain.model.value
 import com.juke.auth.features.admin.domain.usecase.UserCreationUseCase
 import com.juke.auth.features.admin.domain.usecase.UserDeletionUseCase

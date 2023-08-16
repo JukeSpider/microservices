@@ -5,11 +5,11 @@ import com.juke.notification.core.domain.failure.ServiceUnavailableFailure
 import com.juke.notification.core.domain.model.Data
 import com.juke.notification.core.domain.model.Data.Error
 import com.juke.notification.core.domain.model.Data.Success
-import org.slf4j.Logger
-import org.springframework.stereotype.Component
 import jakarta.mail.MessagingException
+import org.slf4j.Logger
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
+import org.springframework.stereotype.Component
 
 @Component
 class MailSenderUtils(

@@ -1,7 +1,5 @@
 package com.juke.auth.features.registration.data.entity.enums
 
-import com.juke.auth.features.registration.data.entity.enums.FlowTypeEnum.*
-
 enum class FlowTypeEnum {
     REGISTRATION,
     PASSWORD_RESET,

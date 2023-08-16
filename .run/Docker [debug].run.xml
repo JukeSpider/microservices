@@ -6,12 +6,13 @@
         <option name="commandLineOptions" value="--build" />
         <option name="services">
           <list>
-            <option value="auth-service" />
-            <option value="database" />
-            <option value="pgadmin" />
-            <option value="notification" />
             <option value="eureka" />
+            <option value="database" />
             <option value="gateway" />
+            <option value="notification" />
+            <option value="auth-service" />
+            <option value="pgadmin" />
+            <option value="rabbitmq" />
           </list>
         </option>
         <option name="sourceFilePath" value="docker-compose.yml" />

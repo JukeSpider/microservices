@@ -18,6 +18,11 @@ spring:
     url: jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_DB}
     user: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
+  rabbitmq:
+    host: ${RABBIT_HOST}
+    port: ${RABBIT_PORT}
+    username: ${RABBIT_USERNAME}
+    password: ${RABBIT_PASSWORD}
 
 crypto:
   jwt:
@@ -33,4 +38,10 @@ otp:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka:8761/eureka
+      defaultZone: http://eureka:${EUREKA_SERVER_PORT}/eureka
+
+rabbitmq:
+  notification:
+    exchange: ${NOTIFICATION_EXCHANGE}
+    queue: ${NOTIFICATION_QUEUE}
+    routing-key: ${NOTIFICATION_ROUTING_KEY}
