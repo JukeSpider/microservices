@@ -10,7 +10,8 @@ import com.juke.auth.core.domain.model.Data.Success
 import com.juke.auth.core.domain.model.value
 import com.juke.auth.features.authentication.domain.failure.EmailNotFoundFailure
 import com.juke.auth.features.registration.data.entity.enums.FlowTypeEnum
-import com.juke.auth.features.registration.data.entity.enums.FlowTypeEnum.*
+import com.juke.auth.features.registration.data.entity.enums.FlowTypeEnum.REGISTRATION
+import com.juke.auth.features.registration.data.entity.enums.FlowTypeEnum.UNDEFINED
 import com.juke.auth.features.registration.domain.failure.PasswordResetUnavailableFailure
 import com.juke.auth.features.registration.domain.failure.RegistrationUnavailableFailure
 import com.juke.auth.features.registration.domain.failure.UndefinedFlowFailure

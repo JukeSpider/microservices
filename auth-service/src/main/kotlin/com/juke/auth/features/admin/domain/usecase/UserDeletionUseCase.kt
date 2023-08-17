@@ -5,7 +5,8 @@ import com.juke.auth.core.domain.behavior.PasswordBehavior
 import com.juke.auth.core.domain.behavior.TokenBehavior
 import com.juke.auth.core.domain.behavior.UserBehavior
 import com.juke.auth.core.domain.model.Data
-import com.juke.auth.core.domain.model.Data.*
+import com.juke.auth.core.domain.model.Data.Error
+import com.juke.auth.core.domain.model.Data.Success
 import com.juke.auth.core.domain.model.value
 import com.juke.auth.core.domain.success.StatusResponse
 import com.juke.auth.core.domain.usecase.UseCase
