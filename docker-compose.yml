@@ -23,8 +23,30 @@ services:
     ]
     depends_on:
       - database
-      - notification
-      - eureka
+
+
+  profile-service:
+    build:
+      context: .
+      dockerfile: profile-service/Dockerfile
+    container_name: profile-service
+    networks:
+      - microservices
+    env_file:
+      - .env
+    ports:
+      - "8082:8082"
+      - "5007:5007"
+    command: [
+      "java",
+      "-Xmx2048m",
+      "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+      "-jar",
+      "/app.jar",
+      "--server.port=8082"
+    ]
+    depends_on:
+      - database
 
   notification:
     build:

@@ -1,11 +1,12 @@
-package com.juke.auth.core.config.security
+package com.juke.profileservice.core.config.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.juke.auth.core.domain.failure.AccessDeniedFailure
-import com.juke.auth.core.domain.failure.AuthenticationFailure
+import com.juke.profileservice.core.domain.failure.AccessDeniedFailure
+import com.juke.profileservice.core.domain.failure.AuthenticationFailure
 import kotlinx.coroutines.reactor.mono
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus.FORBIDDEN
 import org.springframework.http.HttpStatus.UNAUTHORIZED
 import org.springframework.http.MediaType.APPLICATION_JSON
@@ -40,9 +41,8 @@ class SecurityConfig(
             .csrf { csrf -> csrf.disable() }
             .authenticationManager(manager)
             .securityContextRepository(context)
-            .authorizeExchange { ex ->
-                ex.pathMatchers("/api/auth/admin", "/api/auth/admin/**").hasRole("ADMIN")
-            }
+            .authorizeExchange { ex -> ex.pathMatchers(HttpMethod.GET, "/api/profile/job-position").authenticated() }
+            .authorizeExchange { ex -> ex.pathMatchers("/api/profile/job-position").hasRole("ADMIN") }
             .authorizeExchange { ex -> ex.anyExchange().permitAll() }
             .exceptionHandling { ex ->
                 ex.authenticationEntryPoint { exchanges, _ ->
