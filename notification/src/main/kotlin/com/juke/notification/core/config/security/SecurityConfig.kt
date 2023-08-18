@@ -40,10 +40,7 @@ class SecurityConfig(
             .csrf { csrf -> csrf.disable() }
             .authenticationManager(manager)
             .securityContextRepository(context)
-            .authorizeExchange { ex ->
-                ex.pathMatchers("/api/v*/admin", "/api/v*/admin/**").hasRole("ADMIN")
-            }
-            .authorizeExchange { ex -> ex.anyExchange().permitAll() }
+            .authorizeExchange { ex -> ex.anyExchange().authenticated() }
             .exceptionHandling { ex ->
                 ex.authenticationEntryPoint { exchanges, _ ->
                     val buffer = mono { mapper.writeValueAsBytes(AuthenticationFailure()) }

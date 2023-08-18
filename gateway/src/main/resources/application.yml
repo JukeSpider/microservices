@@ -15,6 +15,10 @@ spring:
           uri: lb://NOTIFICATION
           predicates:
             - Path=/api/notification/mail/**
+        - id: profile
+          uri: lb://PROFILE-SERVICE
+          predicates:
+            - Path=/api/profile/**
 
 eureka:
   client:
