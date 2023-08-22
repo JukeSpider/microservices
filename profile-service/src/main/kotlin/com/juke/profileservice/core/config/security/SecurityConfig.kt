@@ -42,8 +42,9 @@ class SecurityConfig(
             .authenticationManager(manager)
             .securityContextRepository(context)
             .authorizeExchange { ex -> ex.pathMatchers(HttpMethod.GET, "/api/profile/job-position").authenticated() }
+            .authorizeExchange { ex -> ex.pathMatchers("/api/profile", "/api/profile/**").authenticated() }
             .authorizeExchange { ex -> ex.pathMatchers("/api/profile/job-position").hasRole("ADMIN") }
-            .authorizeExchange { ex -> ex.anyExchange().authenticated() }
+            .authorizeExchange { ex -> ex.anyExchange().permitAll() }
             .exceptionHandling { ex ->
                 ex.authenticationEntryPoint { exchanges, _ ->
                     val buffer = mono { mapper.writeValueAsBytes(AuthenticationFailure()) }

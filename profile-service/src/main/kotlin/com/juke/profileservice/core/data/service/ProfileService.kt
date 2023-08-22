@@ -8,7 +8,9 @@ import com.juke.profileservice.core.domain.failure.ServiceUnavailableFailure
 import com.juke.profileservice.core.domain.model.Data
 import com.juke.profileservice.core.domain.model.Data.Error
 import com.juke.profileservice.core.domain.model.Data.Success
+import kotlinx.coroutines.flow.toList
 import org.slf4j.Logger
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -33,6 +35,15 @@ class ProfileService(
     override suspend fun save(profile: ProfileEntity): Data<ProfileEntity> {
         return try {
             Success(repo.save(profile))
+        } catch (t: Throwable) {
+            logger.error("Unexpected exception", t)
+            Error(ServiceUnavailableFailure())
+        }
+    }
+
+    override suspend fun findByPage(pageable: Pageable): Data<List<ProfileEntity>> {
+        return try {
+            Success(repo.findAllBy(pageable).toList())
         } catch (t: Throwable) {
             logger.error("Unexpected exception", t)
             Error(ServiceUnavailableFailure())
