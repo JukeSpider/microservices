@@ -63,6 +63,8 @@ dependencies {
 	implementation("com.playtika.reactivefeign:feign-reactor-webclient:4.0.0")
 	implementation("com.playtika.reactivefeign:feign-reactor-spring-cloud-starter:4.0.0")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+	implementation("org.springframework.cloud:spring-cloud-starter-config")
+	implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
 	// testing
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
