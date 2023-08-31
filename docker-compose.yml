@@ -22,6 +22,7 @@ services:
       "--server.port=8080"
     ]
     depends_on:
+      - config-server
       - database
 
 
@@ -46,6 +47,7 @@ services:
       "--server.port=8082"
     ]
     depends_on:
+      - config-server
       - database
 
   notification:
@@ -69,8 +71,8 @@ services:
       "--server.port=8081"
     ]
     depends_on:
+      - config-server
       - database
-      - eureka
 
   eureka:
     build:
@@ -108,6 +110,29 @@ services:
       "-jar",
       "/app.jar",
       "--server.port=8000"
+    ]
+    depends_on:
+      - config-server
+
+  config-server:
+    build:
+      context: .
+      dockerfile: config-server/Dockerfile
+    container_name: config-server
+    env_file:
+      - .env
+    networks:
+      - microservices
+    ports:
+      - "8888:8888"
+      - "5555:5555"
+    command: [
+      "java",
+      "-Xmx2048m",
+      "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5555",
+      "-jar",
+      "/app.jar",
+      "--server.port=8888"
     ]
 
   database:
